@@ -17,6 +17,7 @@ public class MessageSendler {
     private AmqpTemplate amqpTemplate;
 
     public void send(String message){
+        System.out.println("⏩ Отправка в RabbitMQ: " + message);
         amqpTemplate.convertAndSend(queueName, message);
     }
 }
