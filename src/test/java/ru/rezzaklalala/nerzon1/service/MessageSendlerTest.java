@@ -1,17 +1,19 @@
 package ru.rezzaklalala.nerzon1.service;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-//import static org.mockito.Mockito.*;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+
+import static org.mockito.Mockito.*;
+
 class MessageSendlerTest {
     @Mock
-    org.springframework.amqp.rabbit.core.RabbitTemplate rabbitTemplate;
+    RabbitTemplate rabbitTemplate;
     @InjectMocks
-    ru.rezzaklalala.nerzon1.service.MessageSendler messageSendler;
+    MessageSendler messageSendler;
 
     @BeforeEach
     void setUp() {
@@ -19,9 +21,9 @@ class MessageSendlerTest {
     }
 
     @Test
-    void testSend(){
+    void testSend() {
         messageSendler.send("message");
-        verify(rabbitTemplate).convertAndSend(anyString(), anyString(), any(java.lang.Object.class));
+        verify(rabbitTemplate).convertAndSend(anyString(), anyString(), any(Object.class));
     }
 }
 
